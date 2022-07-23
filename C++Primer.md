@@ -137,7 +137,7 @@
 ```
 
 虽然【容器】可以保存【几乎任意的元素类型】，但是使用【容器的某些操作】需要【容器的元素类型】支持【某些操作】。
-如果【容器的元素类型】不支持【这些操作】，就不能使用【容器的这些操作】，只能使用【容器的其他操作】。
+如果【容器的元素类型】不支持【这些操作】，那么不能使用【容器的这些操作】，只能使用【容器的其他操作】。
 
 比如，可以向【顺序容器的有参构造函数】传入【容器的大小】【3.3.1节 P88】，【传入容器大小的顺序容器有参构造函数】使用了【顺序容器的元素的默认构造函数】。
 如果【容器的元素类型】不支持【默认构造函数】，那么定义【容器变量】必须传入【元素的初始化器】。
@@ -322,27 +322,27 @@ auto const迭代器变量 = 容器变量.cbegin();
 
 ###### 表9.3 容器定义和初始化 P299
 
-| 顺序容器的构造函数                                           | array | string                                              | vector | deque | list | forward_list |
-| ------------------------------------------------------------ | ----- | --------------------------------------------------- | ------ | ----- | ---- | ------------ |
-| 容器类型<元素类型> 容器变量;                                 |       |                                                     |        |       |      |              |
-| 容器类型<元素类型> 容器变量{初始化列表};                     |       |                                                     |        |       |      |              |
-| 容器类型<元素类型> 容器变量={初始化列表};                    |       |                                                     |        |       |      |              |
-| 容器类型<元素类型> 容器变量A(容器变量B);                     |       |                                                     |        |       |      |              |
-| 容器类型<元素类型> 容器变量A=容器变量B;                      |       |                                                     |        |       |      |              |
-| 容器类型<元素类型> 容器变量A(容器变量B的迭代器范围的首迭代器,容器变量B的迭代器范围的尾后迭代器); | ×     |                                                     |        |       |      |              |
-| 容器类型<元素类型> 容器变量A=(容器变量B的迭代器范围的首迭代器,容器变量B的迭代器范围的尾后迭代器); | ×     |                                                     |        |       |      |              |
-| 容器类型<元素类型> 容器变量(元素的个数);                     | ×     | ×                                                   |        |       |      |              |
-| 容器类型<元素类型> 容器变量(元素的个数,元素的值);            | ×     |                                                     |        |       |      |              |
-|                                                              |       | string s(字符数组的指针);                           |        |       |      |              |
-|                                                              |       | string s(字符数组的指针,字符的个数);                |        |       |      |              |
-|                                                              |       | string s(字符数组的指针,字符数组的下标,字符的个数); |        |       |      |              |
-|                                                              |       | string s1(s2);                                      |        |       |      |              |
-|                                                              |       | string s1(s2,s2的下标);                             |        |       |      |              |
-|                                                              |       | string s1(s2,s2的下标,字符的个数);                  |        |       |      |              |
-|                                                              |       | string s1=s2.substr(s2的下标);                      |        |       |      |              |
-|                                                              |       | string s1=s2.substr(s2的下标,字符的个数);           |        |       |      |              |
+| 顺序容器的构造函数                                           | array | string                                                       | vector | deque | list | forward_list |
+| ------------------------------------------------------------ | ----- | ------------------------------------------------------------ | ------ | ----- | ---- | ------------ |
+| 容器类型<元素类型> 容器变量;                                 |       |                                                              |        |       |      |              |
+| 容器类型<元素类型> 容器变量{初始化列表};                     |       |                                                              |        |       |      |              |
+| 容器类型<元素类型> 容器变量={初始化列表};                    |       |                                                              |        |       |      |              |
+| 容器类型<元素类型> 容器变量A(容器变量B);                     |       |                                                              |        |       |      |              |
+| 容器类型<元素类型> 容器变量A=容器变量B;                      |       |                                                              |        |       |      |              |
+| 容器类型<元素类型> 容器变量A(容器变量B的迭代器范围的首迭代器,容器变量B的迭代器范围的尾后迭代器); | ×     |                                                              |        |       |      |              |
+| 容器类型<元素类型> 容器变量A=(容器变量B的迭代器范围的首迭代器,容器变量B的迭代器范围的尾后迭代器); | ×     |                                                              |        |       |      |              |
+| 容器类型<元素类型> 容器变量(元素的个数);                     | ×     | ×                                                            |        |       |      |              |
+| 容器类型<元素类型> 容器变量(元素的个数,元素的值);            | ×     |                                                              |        |       |      |              |
+|                                                              |       | string s(字符数组的指针);                                    |        |       |      |              |
+|                                                              |       | string s(字符数组的指针,字符数组的字符的个数);               |        |       |      |              |
+|                                                              |       | string s(字符数组的指针,字符数组的下标,字符数组的字符的个数); |        |       |      |              |
+|                                                              |       | string s1(s2);                                               |        |       |      |              |
+|                                                              |       | string s1(s2,s2的下标);                                      |        |       |      |              |
+|                                                              |       | string s1(s2,s2的下标,s2的字符的个数);                       |        |       |      |              |
+|                                                              |       | string s1=s2.substr(s2的下标);                               |        |       |      |              |
+|                                                              |       | string s1=s2.substr(s2的下标,s2的字符的个数);                |        |       |      |              |
 
-【string s(字符数组的指针,整型参数);的整型参数】是【字符的个数】，不是【开始下标】，和其他情况不同。
+【string s(字符数组的指针,整型参数);的整型参数】是【字符数组的字符的个数】，不是【开始下标】，和其他情况不同。
 
 ```c++
 #include <string>
@@ -765,20 +765,20 @@ int main()
 
 【s1.insert(s1的位置, s2的参数)的s2参数】和【s1.replace(s1的位置, s2的参数)】的s2参数】必须满足下表条件。
 
-| insert(s1的插入位置的下标,s2的参数) | insert(s1的插入位置的迭代器,s2的参数) | replace(s1的删除开始位置的下标,s1删除字符的个数,s2的参数) | replace(s1的删除范围的首迭代器,s1的删除范围的尾后迭代器,s2的参数) | s2的参数可以是                           |
-| ----------------------------------- | ------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------- |
-| √                                   |                                       | √                                                         | √                                                            | 字符数组                                 |
-|                                     |                                       | √                                                         | √                                                            | 字符数组,字符的个数                      |
-|                                     |                                       | √                                                         |                                                              | 字符数组,字符数组的下标,字符的个数       |
-|                                     |                                       | √                                                         | √                                                            | 字符数组的指针                           |
-|                                     |                                       | √                                                         | √                                                            | 字符数组的指针,字符的个数                |
-|                                     |                                       | √                                                         |                                                              | 字符数组的指针,字符数组的下标,字符的个数 |
-|                                     |                                       | √                                                         | √                                                            | string                                   |
-|                                     |                                       | √                                                         |                                                              | string,string的下标                      |
-|                                     |                                       | √                                                         |                                                              | string,string的下标,字符的个数           |
-|                                     | √                                     |                                                           | √                                                            | 拷贝范围的首迭代器,拷贝范围的尾后迭代器  |
-|                                     |                                       | √                                                         | √                                                            | {初始化列表}                             |
-|                                     | √                                     | √                                                         | √                                                            | 字符的个数,字符                          |
+| insert(s1的插入位置的下标,s2的参数) | insert(s1的插入位置的迭代器,s2的参数) | replace(s1的删除开始位置的下标,s1删除字符的个数,s2的参数) | replace(s1的删除范围的首迭代器,s1的删除范围的尾后迭代器,s2的参数) | s2的参数可以是                                     |
+| ----------------------------------- | ------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------- |
+| √                                   |                                       | √                                                         | √                                                            | 字符数组                                           |
+|                                     |                                       | √                                                         | √                                                            | 字符数组,字符数组的字符的个数                      |
+|                                     |                                       | √                                                         |                                                              | 字符数组,字符数组的下标,字符数组的字符的个数       |
+|                                     |                                       | √                                                         | √                                                            | 字符数组的指针                                     |
+|                                     |                                       | √                                                         | √                                                            | 字符数组的指针,字符数组的字符的个数                |
+|                                     |                                       | √                                                         |                                                              | 字符数组的指针,字符数组的下标,字符数组的字符的个数 |
+|                                     |                                       | √                                                         | √                                                            | string                                             |
+|                                     |                                       | √                                                         |                                                              | string,string的下标                                |
+|                                     |                                       | √                                                         |                                                              | string,string的下标,string的字符的个数             |
+|                                     | √                                     |                                                           | √                                                            | 拷贝范围的首迭代器,拷贝范围的尾后迭代器            |
+|                                     |                                       | √                                                         | √                                                            | {初始化列表}                                       |
+|                                     | √                                     | √                                                         | √                                                            | 字符的个数,字符                                    |
 
 s1.insert(s1的插入位置的下标, s2的参数)。
 
@@ -966,7 +966,7 @@ int main()
 	stringB.replace(stringB.begin(), stringB.end(), sz);               // 01234
 	cout << stringB << endl;
 	stringB.clear();
-	stringB.replace(stringB.begin(), stringB.end(), sz/*字符个数*/, 2); // 01
+	stringB.replace(stringB.begin(), stringB.end(), sz/*字符的个数*/, 2); // 01
 	cout << stringB << endl;
 	stringB.clear();
 	// stringB.replace(stringB.begin(), stringB.end(), sz, 2, 1);
@@ -975,7 +975,7 @@ int main()
 	stringB.replace(stringB.begin(), stringB.end(), pc);               // 01234
 	cout << stringB << endl;
 	stringB.clear();
-	stringB.replace(stringB.begin(), stringB.end(), pc/*字符个数*/, 2); // 01
+	stringB.replace(stringB.begin(), stringB.end(), pc/*字符的个数*/, 2); // 01
 	cout << stringB << endl;
 	stringB.clear();
 	// stringB.replace(stringB.begin(), stringB.end(), pc, 2, 1);
@@ -1191,7 +1191,7 @@ int main()
 ```
 
 初始化【迭代器】为【首元素的迭代器】。
-如果可以读取单词，【容器】就调用【.insert()】，向【迭代器指向的位置】插入【cin读入的string】。
+如果可以读取单词，那么【容器】会调用【.insert()】，向【迭代器指向的位置】插入【cin读入的string】。
 使用【.insert()返回的新元素的迭代器】赋值【迭代器】，【迭代】重新指向【容器的首元素】。
 重复【while循环】，读取下一个单词。
 【迭代器】一直指向【容器的首元素】，【while循环的功能】相当于【.push_front()】。
@@ -1391,7 +1391,7 @@ if (!容器变量.empty())
 【空容器】不能调用【.pop()】。
 
 【.pop()】不返回【.pop()删除的元素】。
-如果需要【.pop()删除的元素】，就自己在调用【.pop()】之前保存【.pop()删除的元素】。
+如果需要【.pop()删除的元素】，那么自己在调用【.pop()】之前保存【.pop()删除的元素】。
 
 ##### 从容器内部删除一个元素
 
@@ -1433,7 +1433,7 @@ int main()
 ```
 
 在每次【while循环】中，检查【迭代器指向的元素】是否为【奇数】。
-如果【迭代器指向的元素】是【奇数】，就删除【迭代器指向的元素】，【迭代器】指向【删除元素之后的元素】。
+如果【迭代器指向的元素】是【奇数】，那么删除【迭代器指向的元素】，【迭代器】指向【删除元素之后的元素】。
 如果【迭代器指向的元素】是【偶数】，递增【迭代器】，【迭代器】指向【下一个要判断的元素】。
 
 ##### 删除多个元素
@@ -1514,8 +1514,8 @@ int main()
 【curr】指向【当前要处理的元素】，【prev】指向【当前要处理的元素的前驱】。
 
 在每次【while循环】中，检查【curr指向的元素】是否为【奇数】。
-如果【curr指向的元素】是【奇数】，就向【.erase_after()】传入【prev】，删除【prev指向元素的后继】，使用【.erase_after()的返回值】赋值【curr】，【curr】指向【删除元素的后继】，【prev】指向【之前指向的元素】。
-如果【curr指向的元素】是【偶数】，就递增【prev】和【curr】，【prev】和【curr】指向【它们之前指向元素的后继】。
+如果【curr指向的元素】是【奇数】，那么向【.erase_after()】传入【prev】，删除【prev指向元素的后继】，使用【.erase_after()的返回值】赋值【curr】，【curr】指向【删除元素的后继】，【prev】指向【之前指向的元素】。
+如果【curr指向的元素】是【偶数】，那么递增【prev】和【curr】，【prev】和【curr】指向【它们之前指向元素的后继】。
 
 #### 9.3.5 改变容器大小
 
@@ -1568,7 +1568,7 @@ int main()
 【程序】必须在【每次循环】中都更新【迭代器、引用、指针】。
 如果【程序】在【循环】中调用【.insert()】或【.erase()】。
 那么可以使用【.insert()和.erase()返回的迭代器】更新【迭代器】。
-删除【vector\<int\>的所有偶数元素】，拷贝【vector\<int\>的所有偶数元素】。
+【程序】删除【vector\<int\>的所有偶数元素】，拷贝【vector\<int\>的所有偶数元素】。
 
 ```c++
 #include <vector>
@@ -1657,7 +1657,7 @@ while (迭代器 != 容器变量.end())
 
 向【没有空闲内存的vector和string】插入【新元素】，因为【vector】和【string】在【内存】中连续存储【元素】，所以不能在【其他的内存】保存【新元素】。
 【容器】必须申请【新内存】保存【原有元素】和【新元素】，从【旧内存】拷贝【原有元素】到【新内存】，在【新内存】添加【新元素】，释放【旧内存】。
-如果每次添加【元素】，【vector】和【string】就申请释放一次【内存】，那么【添加元素的操作的速度】慢。
+如果每次添加【元素】，【vector】和【string】都会申请释放一次【内存】，那么【添加元素的操作的速度】慢。
 
 为了加快【添加元素的操作的速度】。
 【vector和string申请的新内存】大于【添加的新元素需要的内存】。
@@ -1681,6 +1681,9 @@ while (迭代器 != 容器变量.end())
 
 【.size()】返回【容器已保存的元素的个数】。
 【.capacity()】返回【现在的缓冲区能保存的元素的最大个数】。
+
+【程序】测试【.size()】和【.capacity()】。
+【.capacity()的返回值】依赖【标准库的实现】
 
 ```c++
 #include <vector>
@@ -1711,26 +1714,232 @@ int main()
 // ivec.capacity() = 28
 ```
 
-在【书上的测试环境】中，【空容器.size()】返回【0】，【空容器.capacity()】返回【0】，【空容器.capacity()的返回值】依赖【标准库的实现】。
-向【容器】添加【元素】之后，【.size()】返回【容器的元素的个数】。
+在【书上的测试环境】中，【空vector.size()】返回【0】，【空vector.capacity()】返回【0】。
+向【vector】添加【元素】之后，【.size()】返回【vector的元素的个数】。
 【.capacity()的返回值】大于等于【.size()的返回值】，【.capacity()的返回值】依赖【标准库的实现】。
-向【vector\<int\>】插入了【24个元素】，在【书上的测试环境】中【.capacity()】返回【32】。
+向【vector\<int\>】插入【24个元素】之后，在【书上的测试环境】中，【.capacity()】返回【32】。
 
-------
+调用【.reserve()】通知【vector】分配【缓冲区】。
+在【书上的测试环境】中，【.size()】返回【24】，【.capacity()】返回【50】。
 
-重构线。重构线。重构线。
+```c++
+#include <vector>
+#include <iostream>
+using namespace std;
 
-【vector】每次申请【新内存】翻倍【capacity】。
+int main()
+{
+	vector<int> ivec;
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 0
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 0
+
+	for (vector<int>::size_type ix = 0; ix < 24; ix++)
+	{
+		ivec.push_back(ix);
+	}
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 24
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 28
+
+	ivec.reserve(50);
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 24
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 50
+
+	return 0;
+}
+
+// ivec.size() = 0
+// ivec.capacity() = 0
+// ivec.size() = 24
+// ivec.capacity() = 28
+// ivec.size() = 24
+// ivec.capacity() = 50
+```
+
+【程序的输出】表明【.reserve()】申请了【缓冲区】。
+
+向【vector】添加【元素】使用完【vector的缓冲区】。
+
+```c++
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	vector<int> ivec;
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 0
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 0
+
+	for (vector<int>::size_type ix = 0; ix < 24; ix++)
+	{
+		ivec.push_back(ix);
+	}
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 24
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 28
+
+	ivec.reserve(50);
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 24
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 50
+
+	while (ivec.size() != ivec.capacity())
+	{
+		ivec.push_back(0);
+	}
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 50
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 50
+
+	return 0;
+}
+
+// ivec.size() = 0
+// ivec.capacity() = 0
+// ivec.size() = 24
+// ivec.capacity() = 28
+// ivec.size() = 24
+// ivec.capacity() = 50
+// ivec.size() = 50
+// ivec.capacity() = 50
+```
+
+因为刚好使用完【vector的缓冲区】，所以【vector】没有申请【新内存】。
+只要没有使用完【vector的缓冲区】，【vector】就不会申请【新内存】。
+
+如果现在再向【vector】添加【新元素】，【vector】需要申请【新内存】。
+
+```c++
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	vector<int> ivec;
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 0
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 0
+
+	for (vector<int>::size_type ix = 0; ix < 24; ix++)
+	{
+		ivec.push_back(ix);
+	}
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 24
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 28
+
+	ivec.reserve(50);
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 24
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 50
+
+	while (ivec.size() != ivec.capacity())
+	{
+		ivec.push_back(0);
+	}
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 50
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 50
+
+	ivec.push_back(0);
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 50
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 75
+
+	return 0;
+}
+
+// ivec.size() = 0
+// ivec.capacity() = 0
+// ivec.size() = 24
+// ivec.capacity() = 28
+// ivec.size() = 24
+// ivec.capacity() = 50
+// ivec.size() = 50
+// ivec.capacity() = 50
+// ivec.size() = 51
+// ivec.capacity() = 75
+```
+
+在【书上的测试环境】中，【.size()】返回【51】，【.capacity()】返回【100】，【vector每次申请的新内存的大小】是【.capacity()】两倍。
 
 调用【.shrink_to_fit()】缩小【capacity】至【size】（不保证缩小）。
 
-【每个版本vector】可以自定义【内存管理策略】，【vector】必须只在【迫不得已】时重新申请【内存】。
+```c++
+#include <vector>
+#include <iostream>
+using namespace std;
 
-在【.insert()】时【size】等于【capacity】，【vector】重新申请【内存】。
-在【.resize()】或【.reserve()】时，【vector】重新申请【内存】。
+int main()
+{
+	vector<int> ivec;
 
-【vector的实现原则】：【vector使用.push_back()添加元素的速度】快。
-向【空vector】调用【n次.push_back()】是【线性阶】。
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 0
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 0
+
+	for (vector<int>::size_type ix = 0; ix < 24; ix++)
+	{
+		ivec.push_back(ix);
+	}
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 24
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 28
+
+	ivec.reserve(50);
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 24
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 50
+
+	while (ivec.size() != ivec.capacity())
+	{
+		ivec.push_back(0);
+	}
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 50
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 50
+
+	ivec.push_back(0);
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 50
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 75
+
+	ivec.shrink_to_fit();
+
+	cout << "ivec.size() = " << ivec.size() << endl;		 // 51
+	cout << "ivec.capacity() = " << ivec.capacity() << endl; // 51
+
+	return 0;
+}
+
+// ivec.size() = 0
+// ivec.capacity() = 0
+// ivec.size() = 24
+// ivec.capacity() = 28
+// ivec.size() = 24
+// ivec.capacity() = 50
+// ivec.size() = 50
+// ivec.capacity() = 50
+// ivec.size() = 51
+// ivec.capacity() = 75
+// ivec.size() = 51
+// ivec.capacity() = 51
+```
+
+在【书上的测试环境】中，【.shrink_to_fit()】不保证一定缩小【缓冲区】。
+
+【每个vector】可以自定义【内存管理策略】。
+【vector】必须只在【迫不得已】时申请【新内存】。
+
+在调用【.insert()】时，如果【size】等于【capacity】，那么【vector】会申请【新内存】，在调用【.resize()】或【.reserve()】时，【vector】会申请【新内存】。
+【缓冲区的大小】依赖【标准库的实现】。
+
+【实现vector的原则】是【调用.push_back()向vector添加元素的速度】快。
+【.push_back()】是【线性阶】。
 
 ### 9.5 额外的string操作
 
@@ -1742,41 +1951,42 @@ int main()
 
 #### 9.5.1 构造string的其他方法
 
-除了【3.2.1节 P76介绍的构造函数】和【其他的顺序容器的构造函数】【表9.3 容器定义和初始化 P299】之外，【string】支持【其他的三个版本的构造函数】【表9.11 构造string的其他方法 P321】。
+除了【3.2.1节 P76介绍的构造函数】和【其他的顺序容器的构造函数】【表9.3 容器定义和初始化 P299】之外，【string】支持【三个其他版本的构造函数】【表9.11 构造string的其他方法 P321】。
 
 ###### 表9.11 构造string的其他方法 P321
 
 参考本章的其他表格【表9.3 容器定义和初始化 P299】。
 
-可以向【string的构造函数】传入【一个string】或【一个const char*】、【下标】、【字符个数】。
+可以向【string的构造函数】传入【一个string】或【一个const char\*】、【string或const char\*的下标】、【string或const char\*的字符的个数】。
 
 ```c++
-string string变量(字符数组, 字符个数);
-string string变量(字符数组, 字符数组下标, 字符个数);
-string string变量A(string变量B, string变量B下标, 字符个数);
+string string变量(字符数组的指针, 字符数组的字符的个数);
+string string变量(字符数组的指针, 字符数组的下标, 字符数组的字符的个数);
+string string变量A(string变量B, string变量B的下标, 字符数组的字符的个数);
 ```
 
-向【string的构造函数】传入【字符数组】，要求【传入的字符数组】以【结束符】结尾，或者同时传入【字符数组】和【字符个数】。
-如果【传入的字符数组】不以【结束符】结尾，并且没有传入【字符个数】，那么【构造函数的行为】未定义。
+如果只向【string的构造函数】传入【字符数组的指针】，那么要求【传入string的构造函数的字符数组】以【结束符】结尾，【string的构造函数】拷贝【传入string的构造函数的字符数组】直到【传入string的构造函数的字符数组的结束符】。
+如果同时向【string的构造函数】传入【字符数组的指针】和【字符数组的字符的个数】，那么不要求【传入string的构造函数的字符数组】以【结束符】结尾。
+如果没有向【string的构造函数】传入【字符数组的字符的个数】，并且【传入string的构造函数的字符数组】不以【结束符】结尾，那么【string的构造函数的行为】未定义。
 
-可以向【string的构造函数】传入【string】、【string下标】、【字符个数】。
-【传入的string下标】必须小于【传入的string的大小】。
-如果【传入的string下标】大于【传入的string的大小】，就抛出【out_of_range异常】【5.6节 P173】。
-如果向【string的构造函数】传入【字符个数】，就从【传入的string下标】拷贝【传入的字符个数】个【字符】。
-【string的构造函数】最多拷贝到【传入的string的结尾】，不管【传入的字符个数】。
+可以向【string的构造函数】传入【string】、【string的下标】、【string的字符的个数】。
+【传入string的构造函数的string的下标】必须小于【传入string的构造函数的string的大小】。
+如果【传入string的构造函数的string的下标】大于【传入string的构造函数的string的大小】，那么【string的构造函数】会抛出【out_of_range异常】【5.6节 P173】。
+如果向【string的构造函数】传入【string的字符的个数】，那么【string的构造函数】从【传入string的构造函数的string的下标】拷贝【传入string的构造函数的字符的个数】个【字符】。
+【string的构造函数】最多拷贝到【传入string的构造函数的string的结尾】，不管【传入string的构造函数的字符的个数】。
 
 ##### substr操作
 
 【.substr()】【表9.12 子字符串操作 P322】返回【调用.substr()的string的子串】。
-可以向【.substr()】传入【调用.substr()的string的子串的开始下标】和【子串的字符个数】。
+可以向【.substr()】传入【调用.substr()的string的子串的开始下标】和【子串的字符的个数】。
 
 ```c++
 string变量A = string变量B.substr(string变量B的子串的开始下标);
-string变量A = string变量B.substr(string变量B的子串的开始下标, 子串的字符个数);
+string变量A = string变量B.substr(string变量B的子串的开始下标, 子串的字符的个数);
 ```
 
-如果【传入的调用.substr()的string的子串的开始下标】超过【调用.substr()的string的大小】，就会抛出【out_of_range异常】【5.6节 P173】。
-【.substr()】最多拷贝到【调用.substr()的string的结尾】，不管【传入的子串的字符个数】。
+如果【传入调用.substr()的string的子串的开始下标】超过【调用.substr()的string的大小】，那么【.substr()】会抛出【out_of_range异常】【5.6节 P173】。
+【.substr()】拷贝【调用.substr()的string】直到【调用.substr()的string的结尾】，不管【传入.substr()的子串的字符的个数】。
 
 ###### 表9.12 子字符串操作 P322
 
@@ -1785,31 +1995,35 @@ string变量A = string变量B.substr(string变量B的子串的开始下标, 子�
 #### 9.5.2 改变string的其他方法
 
 【string】支持【顺序容器】的【赋值运算符】、【.assign()】【9.2.5节 P302】、【.insert()】【9.3.1节 P306】、【.erase()】【9.3.3节 P311】。
-【string】支持【其他的版本的.insert()】和【其他的版本的.erase()】。
+【string】支持【其他版本的.insert()】和【其他版本的.erase()】。
 
-可以向【string的.insert()】或【string的.erase()】传入【操作位置的迭代器】，也可以向【string的.insert()】或【string的.erase()】传入【操作位置的下标】。
-
-```c++
-string变量.insert(插入位置的下标, 插入的字符个数, 插入的字符);
-string变量.erase(删除位置的下标, 删除的字符个数);
-```
-
-可以向【string的.insert()】或【string的.assign()】传入【字符数组】。
+可以向【string.insert()】或【string.erase()】传入【操作位置的迭代器】，也可以向【string.insert()】或【string.erase()】传入【操作位置的下标】。
 
 ```c++
-string变量.assign(字符数组, 字符个数);
-string变量.insert(插入位置的下标, 字符数组);
+string变量.insert(插入位置的下标, 插入的字符的个数, 插入的字符);
+string变量.erase(删除位置的下标, 删除的字符的个数);
 ```
+
+可以向【string.insert()】或【string.assign()】传入【字符数组的指针】。
+
+```c++
+string变量.assign(字符数组的指针, 字符数组的字符的个数);
+string变量.insert(插入位置的下标, 字符数组的指针);
+```
+
+------
+
+重构分割线。重构分割线。重构分割线。
 
 向【.assign()】传入【字符数组】赋值【调用.assign()的string变量】。
-使用从【传入的字符数组】开始的【传入的字符个数】个【字符】赋值【调用.assign()的string变量】。
-【传入的字符个数】必须小于等于【传入的字符数组的大小】。
+使用从【传入的字符数组】开始的【传入的字符的个数】个【字符】赋值【调用.assign()的string变量】。
+【传入的字符的个数】必须小于等于【传入的字符数组的大小】。
 
 向【.insert()】传入【插入位置的下标】和【插入的string】，向【插入位置的下标】插入【传入的string】或【传入的string的子串】。
 
 ```c++
 string变量A.insert(string变量A插入位置的下标, 插入的string变量B);
-string变量A.insert(string变量A插入位置的下标, 插入的string变量B, string变量B开始插入位置的下标, string变量B插入的字符个数);
+string变量A.insert(string变量A插入位置的下标, 插入的string变量B, string变量B开始插入位置的下标, string变量B插入的字符的个数);
 ```
 
 ##### append和replace函数
@@ -1825,10 +2039,10 @@ string变量A.append(插入的string变量B);
 【.replace()】删除【调用.append()的string的元素】，向【调用.append()的string】插入【传入的字符数组】。
 
 ```c++
-string变量.replace(删除位置的下标, 删除的字符个数, 插入的字符数组);
+string变量.replace(删除位置的下标, 删除的字符的个数, 插入的字符数组);
 ```
 
-【.replace()删除的字符个数】可以不等于【.replace()插入的字符个数】。
+【.replace()删除的字符的个数】可以不等于【.replace()插入的字符的个数】。
 
 ###### 表9.13 修改string的操作 P323
 
@@ -1850,25 +2064,25 @@ string变量.replace(删除位置的下标, 删除的字符个数, 插入的字�
 【.insert()】向下标或迭代器指向的元素之前的位置】插入【新元素】。
 
 【插入参数】有很多种。
-【新元素】可以是【string】、【字符数组】、【初始化列表】、【字符和字符个数】。
-如果【新元素】是【string】或【字符数组】，那么可以传入【控制拷贝字符个数的参数】。
+【新元素】可以是【string】、【字符数组】、【初始化列表】、【字符和字符的个数】。
+如果【新元素】是【string】或【字符数组】，那么可以传入【控制拷贝字符的个数的参数】。
 
 不是【每个函数】都支持【所有形式的参数】。
 
-| insert(s1的插入位置的下标,s2的参数) | insert(s1的插入位置的迭代器,s2的参数) | replace(s1的删除开始位置的下标,s1删除字符的个数,s2的参数) | replace(s1的删除范围的首迭代器,s1的删除范围的尾后迭代器,s2的参数) | s2的参数可以是                           |
-| ----------------------------------- | ------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------- |
-| √                                   |                                       | √                                                         | √                                                            | 字符数组                                 |
-|                                     |                                       | √                                                         | √                                                            | 字符数组,字符的个数                      |
-|                                     |                                       | √                                                         |                                                              | 字符数组,字符数组的下标,字符的个数       |
-|                                     |                                       | √                                                         | √                                                            | 字符数组的指针                           |
-|                                     |                                       | √                                                         | √                                                            | 字符数组的指针,字符的个数                |
-|                                     |                                       | √                                                         |                                                              | 字符数组的指针,字符数组的下标,字符的个数 |
-|                                     |                                       | √                                                         | √                                                            | string                                   |
-|                                     |                                       | √                                                         |                                                              | string,string的下标                      |
-|                                     |                                       | √                                                         |                                                              | string,string的下标,字符的个数           |
-|                                     | √                                     |                                                           | √                                                            | 拷贝范围的首迭代器,拷贝范围的尾后迭代器  |
-|                                     |                                       | √                                                         | √                                                            | {初始化列表}                             |
-|                                     | √                                     | √                                                         | √                                                            | 字符的个数,字符                          |
+| insert(s1的插入位置的下标,s2的参数) | insert(s1的插入位置的迭代器,s2的参数) | replace(s1的删除开始位置的下标,s1删除字符的个数,s2的参数) | replace(s1的删除范围的首迭代器,s1的删除范围的尾后迭代器,s2的参数) | s2的参数可以是                                     |
+| ----------------------------------- | ------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------- |
+| √                                   |                                       | √                                                         | √                                                            | 字符数组                                           |
+|                                     |                                       | √                                                         | √                                                            | 字符数组,字符数组的字符的个数                      |
+|                                     |                                       | √                                                         |                                                              | 字符数组,字符数组的下标,字符数组的字符的个数       |
+|                                     |                                       | √                                                         | √                                                            | 字符数组的指针                                     |
+|                                     |                                       | √                                                         | √                                                            | 字符数组的指针,字符数组的字符的个数                |
+|                                     |                                       | √                                                         |                                                              | 字符数组的指针,字符数组的下标,字符数组的字符的个数 |
+|                                     |                                       | √                                                         | √                                                            | string                                             |
+|                                     |                                       | √                                                         |                                                              | string,string的下标                                |
+|                                     |                                       | √                                                         |                                                              | string,string的下标,string的字符的个数             |
+|                                     | √                                     |                                                           | √                                                            | 拷贝范围的首迭代器,拷贝范围的尾后迭代器            |
+|                                     |                                       | √                                                         | √                                                            | {初始化列表}                                       |
+|                                     | √                                     | √                                                         | √                                                            | 字符的个数,字符                                    |
 
 #### 9.5.3 string搜索操作
 
@@ -1934,7 +2148,7 @@ int main()
 ```
 
 在每次【while循环】中，赋值【pos】为【从pos开始在name中找到的numbers的字符的下标】。
-如果【pos】是【合法下标】，就打印【name[pos]】，递增【pos】。
+如果【pos】是【合法下标】，那么打印【name[pos]】，递增【pos】。
 
 如果没有递增【pos】，那么【while循环】不会终止。
 如果没有递增【pos】。
@@ -5600,4 +5814,3 @@ query函数传入一个要查询单词string，query使用【这个string类型�
 使用行号作为下标访问vector获取单词出现所在整行文本。
 
 函数可以正确处理未找到单词的情况，范围for一个空容器，一次循环也不会执行。
-
