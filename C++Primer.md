@@ -1,4 +1,4 @@
-# 第Ⅱ部分 C++标准库
+第Ⅱ部分 C++标准库
 
 ## 第9章 顺序容器
 
@@ -143,7 +143,7 @@
 如果【容器的元素类型】不支持【默认构造函数】，那么定义【容器变量】必须传入【元素的初始化器】。
 
 ```c++
-容器类型<元素类型> 容器变量(元素的个数, 元素的初始化器);
+容器类型<元素类型> 容器变量(容器变量的元素的个数, 容器变量的元素的初始化器);
 ```
 
 在后面介绍【容器的操作】对【元素类型】的其他限制。
@@ -258,7 +258,7 @@ while (begin != end)
 
 #### 9.2.3 begin和end成员
 
-【.begin()】返回【容器的首元素的迭代器】，【.end()】返回【容器的尾后迭代器】【3.4.1节 P95】。
+【.begin()】返回【容器的首迭代器】，【.end()】返回【容器的尾后迭代器】【3.4.1节 P95】。
 调用【.begin()】和【.end()】获取【包含容器所有元素的迭代器范围】。
 
 【表9.2 容器操作 P295】，【.begin()】和【.end()】有多个版本：
@@ -342,7 +342,7 @@ auto const迭代器变量 = 容器变量.cbegin();
 |                                                              |       | string s1=s2.substr(s2的下标);                               |        |       |      |              |
 |                                                              |       | string s1=s2.substr(s2的下标,s2的字符的个数);                |        |       |      |              |
 
-【string s(字符数组的指针,整型参数);的整型参数】是【字符数组的字符的个数】，不是【开始下标】，和其他情况不同。
+【string s(字符数组的指针,整型参数);的整型参数】是【字符数组的字符的个数】，不是【字符数组的操作开始位置的下标】，和其他情况不同。
 
 ```c++
 #include <string>
@@ -353,13 +353,13 @@ int main()
 {
 	string stringA("01234");
 
-	string stringB("01234");	                           // 01234
-	string stringC("01234", 2/*字符的个数*/);               // 01
-	string stringD("01234", 2/*开始下标*/, 1/*字符的个数*/); // 2
+	string stringB("01234");	                                    // 01234
+	string stringC("01234", 2/*字符的个数*/);                        // 01
+	string stringD("01234", 2/*操作开始位置的下标*/, 1/*字符的个数*/); // 2
 
-	string stringE(stringA);	                           // 01234
-	string stringF(stringA, 2/*开始下标*/);                 // 234
-	string stringG(stringA, 2/*开始下标*/, 1/*字符的个数*/); // 2
+	string stringE(stringA);	                                    // 01234
+	string stringF(stringA, 2/*操作开始位置的下标*/);                 // 234
+	string stringG(stringA, 2/*操作开始位置的下标*/, 1/*字符的个数*/); // 2
 
 	cout << stringB << endl;
 	cout << stringC << endl;
@@ -417,8 +417,8 @@ int main()
 如果没有传入【元素的初始值】，那么【标准库】会创建【值初始化器】【3.3.1节 P88】。
 
 ```c++
-容器类型<元素类型> 容器变量(元素的个数);
-容器类型<元素类型> 容器变量(元素的个数, 元素的初始值);
+容器类型<元素类型> 容器变量(容器变量的元素的个数);
+容器类型<元素类型> 容器变量(容器变量的元素的个数, 容器变量的元素的初始值);
 ```
 
 如果【元素类型】是【内置类型】或【支持默认构造函数的类类型】，那么【传入容器的大小和元素的值的构造函数】可以只传入【容器的大小】。
@@ -533,11 +533,11 @@ int main()
 	cout << stringB << endl;
 	stringB.assign(pc, 2, 1);	        // 2
 	cout << stringB << endl;
-	stringB.assign(stringA);	           // 01234
+	stringB.assign(stringA);	                    // 01234
 	cout << stringB << endl;
-	stringB.assign(stringA, 2/*开始下标*/); // 234
+	stringB.assign(stringA, 2/*赋值开始位置的下标*/); // 234
 	cout << stringB << endl;
-	stringB.assign(stringA, 2, 1);         // 2
+	stringB.assign(stringA, 2, 1);                  // 2
 	cout << stringB << endl;
 	stringB.assign(stringA.begin(), stringA.end()); // 01234
 	cout << stringB << endl;
@@ -545,62 +545,6 @@ int main()
 	cout << stringB << endl;
 	stringB.assign(5, '0'); // 00000
 	cout << stringB << endl;
-
-	return 0;
-}
-```
-
-s1.append(s2的参数)。
-
-```c++
-#include <string>
-#include <iostream>
-using namespace std;
-
-int main()
-{
-	char sz[]{ "01234" };	   // 字符数组
-	char* pc = nullptr;		   // 字符数组的指针
-	pc = sz;
-	string stringA{ "01234" }; // string
-	string stringB;
-
-	stringB.append(sz);			        // 01234
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append(sz, 2/*字符的个数*/); // 01
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append(sz, 2, 1);	        // 2
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append(pc);			        // 01234
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append(pc, 2/*字符的个数*/); // 01
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append(pc, 2, 1);	        // 2
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append(stringA);         	   // 01234
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append(stringA, 2/*开始下标*/); // 234
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append(stringA, 2, 1);         // 2
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append(stringA.begin(), stringA.end()); // 01234
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append({ "01234" }); // 01234
-	cout << stringB << endl;
-	stringB.clear();
-	stringB.append(5, '0'); // 00000
-	cout << stringB << endl;
-	stringB.clear();
 
 	return 0;
 }
@@ -703,19 +647,19 @@ int main()
 	string stringA{ "01234" }; // string
 	string stringB{ "01234" };
 
-	cout << stringB.compare(sz) << endl;				          // 0
-	cout << stringB.compare(0, 5, sz) << endl;			          // 0
-	cout << stringB.compare(0, 4, sz, 4/*字符的个数*/) << endl;    // 0
-	cout << stringB.compare(1, 4, sz, 1, 4) << endl;	          // 0
-	cout << stringB.compare(pc) << endl;				          // 0
-	cout << stringB.compare(0, 5, pc) << endl;			          // 0
-	cout << stringB.compare(0, 4, pc, 4/*字符的个数*/) << endl;    // 0
-	cout << stringB.compare(1, 4, pc, 1, 4) << endl;	          // 0
-	cout << stringB.compare(stringA) << endl;			          // 0
-	cout << stringB.compare(0, 5, stringA) << endl;		          // 0
-	cout << stringB.compare(1, 4, stringA, 1/*开始下标*/) << endl; // 0
-	cout << stringB.compare(1, 4, stringA, 1, 4) << endl;         // 0
-	cout << stringB.compare({ "01234" }) << endl;		          // 0
+	cout << stringB.compare(sz) << endl;				                    // 0
+	cout << stringB.compare(0, 5, sz) << endl;			                    // 0
+	cout << stringB.compare(0, 4, sz, 4/*字符的个数*/) << endl;              // 0
+	cout << stringB.compare(1, 4, sz, 1, 4) << endl;	                    // 0
+	cout << stringB.compare(pc) << endl;				                    // 0
+	cout << stringB.compare(0, 5, pc) << endl;			                    // 0
+	cout << stringB.compare(0, 4, pc, 4/*字符的个数*/) << endl;              // 0
+	cout << stringB.compare(1, 4, pc, 1, 4) << endl;	                    // 0
+	cout << stringB.compare(stringA) << endl;			                    // 0
+	cout << stringB.compare(0, 5, stringA) << endl;		                    // 0
+	cout << stringB.compare(1, 4, stringA, 1/*比较开始位置的下标*/) << endl;  // 0
+	cout << stringB.compare(1, 4, stringA, 1, 4) << endl;                   // 0
+	cout << stringB.compare({ "01234" }) << endl;		                    // 0
 
 	return 0;
 }
@@ -763,6 +707,7 @@ int main()
 | 最后一个新元素的迭代器                          |                                                              |       |                               |        |       |      | fl.insert_after(插入位置之前的迭代器,元素的个数,元素的值);   |
 | 新元素的迭代器                                  |                                                              |       |                               |        |       |      | fl.emplace_after(插入位置之前的迭代器,元素类型的构造函数的参数; |
 
+【s1.assign(s2的参数)的s2参数】和【s1.append(s2的参数)的s2参数】没有限制。
 【s1.insert(s1的位置, s2的参数)的s2参数】和【s1.replace(s1的位置, s2的参数)】的s2参数】必须满足下表条件。
 
 | insert(s1的插入位置的下标,s2的参数) | insert(s1的插入位置的迭代器,s2的参数) | replace(s1的删除开始位置的下标,s1删除字符的个数,s2的参数) | replace(s1的删除范围的首迭代器,s1的删除范围的尾后迭代器,s2的参数) | s2的参数可以是                                     |
@@ -779,6 +724,62 @@ int main()
 |                                     | √                                     |                                                           | √                                                            | 拷贝范围的首迭代器,拷贝范围的尾后迭代器            |
 |                                     |                                       | √                                                         | √                                                            | {初始化列表}                                       |
 |                                     | √                                     | √                                                         | √                                                            | 字符的个数,字符                                    |
+
+s1.append(s2的参数)。
+
+```c++
+#include <string>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	char sz[]{ "01234" };	   // 字符数组
+	char* pc = nullptr;		   // 字符数组的指针
+	pc = sz;
+	string stringA{ "01234" }; // string
+	string stringB;
+
+	stringB.append(sz);			        // 01234
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append(sz, 2/*字符的个数*/); // 01
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append(sz, 2, 1);	        // 2
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append(pc);			        // 01234
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append(pc, 2/*字符的个数*/); // 01
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append(pc, 2, 1);	        // 2
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append(stringA);         	            // 01234
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append(stringA, 2/*拷贝开始位置的下标*/); // 234
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append(stringA, 2, 1);                  // 2
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append(stringA.begin(), stringA.end()); // 01234
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append({ "01234" }); // 01234
+	cout << stringB << endl;
+	stringB.clear();
+	stringB.append(5, '0'); // 00000
+	cout << stringB << endl;
+	stringB.clear();
+
+	return 0;
+}
+```
 
 s1.insert(s1的插入位置的下标, s2的参数)。
 
@@ -925,13 +926,13 @@ int main()
 	stringB.replace(0, 0, pc, 2, 1);           // 2
 	cout << stringB << endl;
 	stringB.clear();
-	stringB.replace(0, 0, stringA);		          // 01234
+	stringB.replace(0, 0, stringA);		                   // 01234
 	cout << stringB << endl;
 	stringB.clear();
-	stringB.replace(0, 0, stringA, 2/*开始下标*/); // 234
+	stringB.replace(0, 0, stringA, 2/*删除开始位置的下标*/); // 234
 	cout << stringB << endl;
 	stringB.clear();
-	stringB.replace(0, 0, stringA, 2, 1);         // 2
+	stringB.replace(0, 0, stringA, 2, 1);                  // 2
 	cout << stringB << endl;
 	stringB.clear();
 	// stringB.replace(0, 0, stringA.begin(), stringA.end());
@@ -1190,7 +1191,7 @@ int main()
 }
 ```
 
-初始化【迭代器】为【首元素的迭代器】。
+初始化【迭代器】为【首迭代器】。
 如果可以读取单词，那么【容器】会调用【.insert()】，向【迭代器指向的位置】插入【cin读入的string】。
 使用【.insert()返回的新元素的迭代器】赋值【迭代器】，【迭代】重新指向【容器的首元素】。
 重复【while循环】，读取下一个单词。
@@ -1365,17 +1366,17 @@ if (!容器变量.empty())
 
 ###### 表9.7 顺序容器的删除操作 P311
 
-| 删除元素函数的返回值                          | 顺序容器                                         | array | string                                | vector | deque | list | forward_list                                              |
-| --------------------------------------------- | ------------------------------------------------ | ----- | ------------------------------------- | ------ | ----- | ---- | --------------------------------------------------------- |
-|                                               | .pop_back();                                     | ×     |                                       |        |       |      | ×                                                         |
-|                                               | .pop_front();                                    | ×     | ×                                     | ×      |       |      |                                                           |
-| 删除位置之后的迭代器                          | .erase(删除位置的迭代器);                        | ×     |                                       |        |       |      | ×                                                         |
-| 删除范围的尾后迭代器                          | .erase(删除范围的首迭代器,删除范围的尾后迭代器); | ×     |                                       |        |       |      | ×                                                         |
-|                                               | .clear();                                        | ×     |                                       |        |       |      |                                                           |
-| 删除位置之后的迭代器                          |                                                  |       |                                       |        |       |      | fl.erase_after(删除位置之前的迭代器)                      |
-| 删除范围的尾后迭代器                          |                                                  |       |                                       |        |       |      | fl.erase_after(删除范围之前的迭代器,删除范围的尾后迭代器) |
-| auto/auto&接收调用.erase()的string的拷贝/引用 |                                                  |       | s.erase(删除开始位置的下标);          |        |       |      |                                                           |
-| auto/auto&接收调用.erase()的string的拷贝/引用 |                                                  |       | s.erase(删除开始位置的下标,删除个数); |        |       |      |                                                           |
+| 删除元素函数的返回值                          | 顺序容器                                         | array | string                                      | vector | deque | list | forward_list                                              |
+| --------------------------------------------- | ------------------------------------------------ | ----- | ------------------------------------------- | ------ | ----- | ---- | --------------------------------------------------------- |
+|                                               | .pop_back();                                     | ×     |                                             |        |       |      | ×                                                         |
+|                                               | .pop_front();                                    | ×     | ×                                           | ×      |       |      |                                                           |
+| 删除位置之后的迭代器                          | .erase(删除位置的迭代器);                        | ×     |                                             |        |       |      | ×                                                         |
+| 删除范围的尾后迭代器                          | .erase(删除范围的首迭代器,删除范围的尾后迭代器); | ×     |                                             |        |       |      | ×                                                         |
+|                                               | .clear();                                        | ×     |                                             |        |       |      |                                                           |
+| 删除位置之后的迭代器                          |                                                  |       |                                             |        |       |      | fl.erase_after(删除位置之前的迭代器)                      |
+| 删除范围的尾后迭代器                          |                                                  |       |                                             |        |       |      | fl.erase_after(删除范围之前的迭代器,删除范围的尾后迭代器) |
+| auto/auto&接收调用.erase()的string的拷贝/引用 |                                                  |       | s.erase(删除开始位置的下标);                |        |       |      |                                                           |
+| auto/auto&接收调用.erase()的string的拷贝/引用 |                                                  |       | s.erase(删除开始位置的下标,删除字符的个数); |        |       |      |                                                           |
 
 删除【deque的除了首尾之外的元素】会使【deque的所有迭代器、引用、指针】失效。
 删除【vector、string的元素】会使【vector、string的删除元素以及之后的迭代器、引用、指针】失效。
@@ -1978,14 +1979,14 @@ string string变量A(string变量B, string变量B的下标, 字符数组的字�
 ##### substr操作
 
 【.substr()】【表9.12 子字符串操作 P322】返回【调用.substr()的string的子串】。
-可以向【.substr()】传入【调用.substr()的string的子串的开始下标】和【子串的字符的个数】。
+可以向【.substr()】传入【调用.substr()的string的子串的操作开始位置的下标】和【子串的字符的个数】。
 
 ```c++
-string变量A = string变量B.substr(string变量B的子串的开始下标);
-string变量A = string变量B.substr(string变量B的子串的开始下标, 子串的字符的个数);
+string变量A = string变量B.substr(string变量B的子串的操作开始位置的下标);
+string变量A = string变量B.substr(string变量B的子串的操作开始位置的下标, 子串的字符的个数);
 ```
 
-如果【传入调用.substr()的string的子串的开始下标】超过【调用.substr()的string的大小】，那么【.substr()】会抛出【out_of_range异常】【5.6节 P173】。
+如果【传入调用.substr()的string的子串的操作开始位置的下标】超过【调用.substr()的string的大小】，那么【.substr()】会抛出【out_of_range异常】【5.6节 P173】。
 【.substr()】拷贝【调用.substr()的string】直到【调用.substr()的string的结尾】，不管【传入.substr()的子串的字符的个数】。
 
 ###### 表9.12 子字符串操作 P322
@@ -2011,20 +2012,20 @@ string变量.assign(字符数组的指针, 字符数组的字符的个数);
 string变量.insert(插入位置的下标, 字符数组的指针);
 ```
 
+调用【.assign()】赋值【调用.assign()的string变量】。
+【.assign()】从【传入.assign()的字符数组的指针】开始拷贝【传入.assign()的字符数组的字符的个数】个【字符】，赋值【调用.assign()的string变量】。
+【传入.assign()】的【字符数组的字符的个数】必须小于等于【传入.assign()的字符数组】的【字符的个数】。
+
+调用【string.insert()】，向【string.insert()】传入【插入位置的下标】和【插入的string】，【string.insert()】向【传入.insert()的插入位置的下标】插入【传入.insert()的string】或【传入.insert()的string的子串】。
+
+```c++
+string变量A.insert(string变量A的插入位置的下标, 插入string变量A的string变量B);
+string变量A.insert(string变量A的插入位置的下标, 插入string变量A的string变量B, string变量B的拷贝开始位置的下标, string变量B拷贝的字符的个数);
+```
+
 ------
 
 重构分割线。重构分割线。重构分割线。
-
-向【.assign()】传入【字符数组】赋值【调用.assign()的string变量】。
-使用从【传入的字符数组】开始的【传入的字符的个数】个【字符】赋值【调用.assign()的string变量】。
-【传入的字符的个数】必须小于等于【传入的字符数组的大小】。
-
-向【.insert()】传入【插入位置的下标】和【插入的string】，向【插入位置的下标】插入【传入的string】或【传入的string的子串】。
-
-```c++
-string变量A.insert(string变量A插入位置的下标, 插入的string变量B);
-string变量A.insert(string变量A插入位置的下标, 插入的string变量B, string变量B开始插入位置的下标, string变量B插入的字符的个数);
-```
 
 ##### append和replace函数
 
