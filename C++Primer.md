@@ -1,4 +1,4 @@
-第Ⅱ部分 C++标准库
+# 第Ⅱ部分 C++标准库
 
 ## 第9章 顺序容器
 
@@ -2002,7 +2002,7 @@ string变量A = string变量B.substr(string变量B的子串的操作开始位置
 
 ```c++
 string变量.insert(插入位置的下标, 插入的字符的个数, 插入的字符);
-string变量.erase(删除位置的下标, 删除的字符的个数);
+string变量.erase(删除开始位置的下标, 删除字符的个数);
 ```
 
 可以向【string.insert()】或【string.assign()】传入【字符数组的指针】。
@@ -2023,52 +2023,50 @@ string变量A.insert(string变量A的插入位置的下标, 插入string变量A�
 string变量A.insert(string变量A的插入位置的下标, 插入string变量A的string变量B, string变量B的拷贝开始位置的下标, string变量B拷贝的字符的个数);
 ```
 
-------
-
-重构分割线。重构分割线。重构分割线。
-
 ##### append和replace函数
 
-【string】额外支持【.append()】和【.replace()】，调用【.append()】和【.replace()】修改【string】。
+【string】额外支持【.append()】和【.replace()】，【.append()】和【.replace()】修改【调用.append()或.replace()的string】。
 【表9.13 修改string的操作 P323】描述了【.append()和.replace()的功能】。
-【.append()】向【调用.append()的string的末尾】插入【传入的string变量】。
+【.append()】向【调用.append()的string的末尾】插入【传入.append()的string】。
 
 ```c++
 string变量A.append(插入的string变量B);
 ```
 
-【.replace()】删除【调用.append()的string的元素】，向【调用.append()的string】插入【传入的字符数组】。
+【.replace()】删除【调用.replace()的string】从，向【调用.replace()的string】插入【传入.replace()的字符数组】。
 
 ```c++
-string变量.replace(删除位置的下标, 删除的字符的个数, 插入的字符数组);
+string变量.replace(删除开始位置的下标, 删除字符的个数, 插入的字符数组);
 ```
 
-【.replace()删除的字符的个数】可以不等于【.replace()插入的字符的个数】。
+【.replace()删除字符的个数】可以不等于【.replace()插入的字符的个数】。
 
 ###### 表9.13 修改string的操作 P323
 
-参考本章的其他表格【表9.5 向顺序容器添加元素的操作 P305】。
+参考本章的其他表格【表9.4 容器赋值运算 P302】、【表9.5 向顺序容器添加元素的操作 P305】、【表9.7 顺序容器的删除操作 P311】。
 
 ##### 改变string的多种重载函数
 
-【.assign()】、【.append()】、【.insert()】、【.replace()】有【多个重载版本】。
-【这些函数的插入参数】和【删除参数】有不同版本。
-【这些函数】有【通用的接口】。
+【表9.13 修改string的操作 P323】列出的【.assign()】、【.append()】、【.insert()】、【.replace()】有【多个重载版本】。
+【这些函数】的【指定调用函数的string的删除范围的参数】、【指定调用函数的string的插入位置的参数】、【指定传入函数的string的拷贝范围的参数】有不同版本。
+【这些函数的接口】通用。
 
-【.assign()】和【.append()】没有【删除参数】：
-【.assign()】删除【调用.assign()的string的所有元素】，【.append()】不删除【元素】。
+【.assign()】和【.append()】不需要【指定删除范围的参数】：
+【.assign()】删除【调用.assign()的string的所有元素】，【.append()】不删除【调用.append()的string的元素】。
 
-【.replace()的删除参数】有两种。
-【删除开始位置】和【删除字符的个数】，或者【迭代器范围】。
-【.insert()的插入参数】有两种：
-【下标】或【迭代器】。
-【.insert()】向下标或迭代器指向的元素之前的位置】插入【新元素】。
+【.replace()的指定删除范围的参数】有两种。
+【删除开始位置的下标】和【删除字符的个数】，或者【迭代器范围】。
+【.insert()的指定插入位置的参数】有两种：
+【插入位置的下标】或【插入位置的迭代器】。
+【.insert()】向【传入.insert()的下标或迭代器指向的元素】插入【新元素】。
 
-【插入参数】有很多种。
+【指定传入函数的string的拷贝范围的参数】有很多种。
 【新元素】可以是【string】、【字符数组】、【初始化列表】、【字符和字符的个数】。
 如果【新元素】是【string】或【字符数组】，那么可以传入【控制拷贝字符的个数的参数】。
 
 不是【每个函数】都支持【所有形式的参数】。
+比如，【.insert()】不支持【下标】和【初始化列表】。
+不支持同时传入【插入位置的迭代器】和【字符数组的指针】。
 
 | insert(s1的插入位置的下标,s2的参数) | insert(s1的插入位置的迭代器,s2的参数) | replace(s1的删除开始位置的下标,s1删除字符的个数,s2的参数) | replace(s1的删除范围的首迭代器,s1的删除范围的尾后迭代器,s2的参数) | s2的参数可以是                                     |
 | ----------------------------------- | ------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------- |
@@ -2087,26 +2085,117 @@ string变量.replace(删除位置的下标, 删除的字符的个数, 插入的�
 
 #### 9.5.3 string搜索操作
 
-【string】支持【六种的搜索函数】，【每种搜索函数】有【四个重载版本】。
+【string】支持【六个搜索函数】，【每个搜索函数】有【四个重载版本】。
 【表9.14 string搜索操作 P325】描述了【搜索成员函数】和【搜索成员函数的参数】。
-【每种搜索函数】都返回【string::size_type类型的找到的下标】。
-如果搜索失败，那么返回【static成员变量string::npos】【7.6节 P268】。
-【标准库】定义【string::npos】为【const string::size_type类型】，赋值【string::npos】为【-1】。
-因为【string::npos】是【无符号类型】，所以赋值【string::npos】为【-1】，【string::npos】是【string的最大大小】【2.1.2节 P32】。
+【每个搜索函数】都返回【string::size_type类型的搜索函数找到的下标】。
+如果【搜索函数】搜索失败，那么【搜索函数】返回【string的static成员变量string::npos】【7.6节 P268】。
+【标准库】定义【string::npos】为【const string::size_type类型】，初始化【string::npos】为【-1】。
+因为【string::npos】是【无符号类型】，所以【-1】是【string的最大大小】【2.1.2节 P32】。
 
-因为【string::npos】是【无符号类型】，所以不推荐使用【有符号类型变量】接收【搜索函数的返回值】。
-
-使用【auto】接收【搜索函数的返回值】。
+因为【搜索函数】返回【string::size_type类型】，【string::size_type类型】是【无符号类型】，所以不推荐使用【有符号类型变量】接收【搜索函数的返回值】。
 
 ###### 表9.14 string搜索操作 P325
 
-参考本章的其他表格【表9.6 在顺序容器中访问元素的操作 P310】。
+```c++
+// 失败返回【string::npos】
+// 成功返回
+在string变量中【参数】【第一次】出现的下标              string变量.find(参数)
+在string变量中【参数】【最后一次】出现的下标            string变量.rfind(参数)
+在string变量中【参数中的字符】【第一次】出现的下标       string变量.find_first_of(参数)
+在string变量中【参数中的字符】【最后一次】出现的下标     string变量.find_last_of(参数)
+在string变量中【参数中没有的字符】【第一次】出现的下标   string变量.find_first_not_of(参数)
+在string变量中【参数中没有的字符】【最后一次】出现的下标 string变量.find_last_not_of(参数)
+
+// 参数
+搜索的字符
+搜索的字符, 搜索开始位置的下标
+搜索的字符数组的指针
+搜索的字符数组的指针, 搜索开始位置的下标
+搜索的字符数组的指针, 搜索开始位置的下标, 搜索的字符数组的字符的个数
+搜索的string
+搜索的string, 搜索开始位置的下标
+```
+
+string变量.find(参数)。
+
+```c++
+#include <string>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	//              0123456789ABC
+	string stringA("Hello worlld!");
+	string stringB("ll");
+
+	cout << stringA.find('o') << endl;		   // 4，搜索字符'o'
+	cout << stringA.find('o', 5) << endl;	   // 7，从下标5开始搜索字符'o'
+	cout << stringA.find("ll") << endl;		   // 2，搜索字符串"ll"
+	cout << stringA.find("ll", 5) << endl;	   // 9，从下标5开始搜索字符串"ll"
+	cout << stringA.find("llo", 5, 2) << endl; // 9，从下标5开始搜索【字符串"llo"的前2个字符组成的子串】
+	cout << stringA.find(stringB) << endl;	   // 2，搜索string"ll"
+	cout << stringA.find(stringB, 5) << endl;  // 9，从下标5开始搜索string"ll"
+
+	return 0;
+}
+```
+
+string变量.find_first_of(参数)。
+
+```c++
+#include <string>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	//              0123456789ABC
+	string stringA("Hello worlld!");
+	string stringB("ll");
+
+	cout << stringA.find_first_of('l') << endl;			// 2，搜索字符'l'
+	cout << stringA.find_first_of('l', 5) << endl;		// 9，从下标5开始搜索字符'l'
+	cout << stringA.find_first_of("ll") << endl;		// 2，搜索字符串"ll"中的字符
+	cout << stringA.find_first_of("ll", 5) << endl;     // 9，从下标5开始搜索字符串"ll"中的字符
+	cout << stringA.find_first_of("llo", 5, 2) << endl; // 9，从下标5开始搜索字符串"llo"中的前2个字符
+	cout << stringA.find_first_of(stringB) << endl;		// 2，搜索string"ll"中的字符
+	cout << stringA.find_first_of(stringB, 5) << endl;	// 9，从下标5开始搜索string"ll"中的字符
+
+	return 0;
+}
+```
+
+string变量.find_first_not_of(参数)。
+
+```c++
+#include <string>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	//              0123456789ABC
+	string stringA("Hello worlld!");
+	string stringB("Heo word!");
+
+	cout << stringA.find_first_not_of('H') << endl;			           // 1，搜索非字符'H'
+	cout << stringA.find_first_not_of(' ', 5) << endl;		           // 6，从下标5开始搜索非字符' '
+	cout << stringA.find_first_not_of("Heo word!") << endl;		       // 2，搜索非字符串"Heo word!"中的字符
+	cout << stringA.find_first_not_of("Heo word!", 5) << endl;         // 9，从下标5开始搜索非字符串"Heo word!"中的字符
+	cout << stringA.find_first_not_of("Hello worlld!", 5, 12) << endl; // 12，从下标5开始搜索非字符串"Hello worlld!"中的前12个字符
+	cout << stringA.find_first_not_of(stringB) << endl;		           // 2，搜索非string"Heo word!"中的字符
+	cout << stringA.find_first_not_of(stringB, 5) << endl;	           // 9，从下标5开始搜索非string"Heo word!"中的字符
+
+	return 0;
+}
+```
 
 ##### 指定在哪里开始搜索
 
-可以向【搜索函数】传入【搜索开始的下标】，指向【搜素开始的位置】。
-默认情况，【搜索开始的下标】是【0】。
-使用【搜索开始的下标】在【调用搜索函数的string】中循环搜索【传入搜索函数的string】：
+可以向【搜索函数】传入【搜索开始位置的下标】。
+默认情况，【搜索开始位置的下标】是【0】。
+可以使用【搜索开始位置的下标】在【调用搜索函数的string】中循环搜索【传入搜索函数的string】。
 
 ```c++
 #include <string>
@@ -2148,35 +2237,56 @@ int main()
 // name[35] = B
 ```
 
-在每次【while循环】中，赋值【pos】为【从pos开始在name中找到的numbers的字符的下标】。
+在每次【while循环】中赋值【pos】为【从pos开始在name中找到的numbers的字符的下标】。
 如果【pos】是【合法下标】，那么打印【name[pos]】，递增【pos】。
 
 如果没有递增【pos】，那么【while循环】不会终止。
-如果没有递增【pos】。
-那么调用【.find_first_of()】会重复的返回【pos】。
+思考【没有递增pos的情况】。
+向【.find_first_of()】传入的是【第一次.find_first_of()的返回值】，【.find_first_of()】从【第一次.find_first_of()的返回值】开始搜索。
+【第一次之后每次.find_first_of()】会重复的返回【第一次.find_first_of()的返回值】。
 
 ##### 逆向搜索
 
 【string】支持【反向搜索成员函数】。
-【rfind.()】反向搜索【传入rfind.()的参数】。
+【rfind.()】在【调用rfind.()的string】中反向搜索【传入rfind.()的参数】。
 
-【find_last的功能】和【find_first】类似，【find_last】反向搜索【传入find_first的参数】：
+```c++
+#include <string>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	string river("Mississippi");
+	auto first_pos = river.find("is");
+	auto last_pos = river.rfind("is");
+
+	cout << "first_pos = " << first_pos << endl; // 1
+	cout << "last_pos = " << last_pos << endl;	 // 4
+
+	return 0;
+}
+```
+
+【find.()】返回【下标1】，是【"is"第一次出现的下标】。，【rfind.()】返回【下标4】，是【"is"最后一次出现的下标】。
+
+【find_last的功能】和【find_first】类似，【find_last】反向搜索【传入find_last的参数】：
 
 【.find_last_of()】在【调用.find_last_of()的string】中反向搜索【传入.find_last_of()的string的字符】。
 【.find_last_not_of()】在【调用.find_last_not_of()的string】中反向搜索【不是传入.find_last_not_of()的string的字符】。
 
-可以向【搜索函数】传入【搜索开始的下标】，指向【搜素开始的位置】。
+可以向【搜索函数】传入【搜索开始位置的下标】。
 
 #### 9.5.4 compare函数
 
-除了【关系运算符】【3.2.2节 P79】之外，【string】支持【一组.compare()】，【.compare()的行为】和【strcmp()】【3.5.4节 P109】类似。
+除了【关系运算符】【3.2.2节 P79】之外，【string】支持【一组.compare()】，【.compare()的行为】和【C标准库的strcmp()】【3.5.4节 P109】类似。
 如果【调用.compare()的string】大于【传入.compare()的string】，那么【.compare()】返回【正数】，
 如果【调用.compare()的string】等于【传入.compare()的string】，那么【.compare()】返回【0】，
 如果【调用.compare()的string】小于【传入.compare()的string】，那么【.compare()】返回【负数】。
 
 【表9.15 s.compare的几种参数形式 P327】，【string】支持【六个版本.compare()】。
-【比较两个string】和【比较string和字符数组】，【传入.compare()的参数】不同。
-可以比较【整个】或【部分】。
+可以比较【两个string】或【string和字符数组】，这两种情况下【传入.compare()的参数】不同。
+可以比较【整个字符串】或【部分字符串】。
 
 ###### 表9.15 s.compare的几种参数形式 P327
 
@@ -2184,9 +2294,23 @@ int main()
 
 #### 9.5.5 数值转换
 
-转换string和数值的函数。
+【字符串】可以包含【表示数值的字符】。
+比如，可以使用【两个字符的string"15"】表示【15】。
+【一个数】的【字符表示】和【整型表示】不同。
+【15】保存为【16位的short类型】，【15的整型表示的二进制位】是【0000 0000 0000 1111】。
+【15】保存为【Latin-1编码的char类型】，【15的字符表示的二进制位】是【0011 0001 0011 0101】。
+【第一个字节】表示【字符'1'】，【八进制值】是【061】，【第二个字节】表示【字符'5'】，【八进制值】是【065】。
 
-【转换数值的string的第一个非空白字符】必须是【数值转换目标类型可能出现的字符】。
+【C++11】支持【转换string和数值的函数】。
+
+```c++
+string string变量 = to_string(整型变量);
+double double变量 = stod(string变量);
+```
+
+调用【to_string()】转换【整型变量】为【string变量】，调用【stod()】转换【string变量】为【double变量】。
+
+【传入字符转换数值函数的string的第一个非空白字符】必须是【数值中可能出现的字符】。
 
 ```c++
 #include <string>
@@ -2203,11 +2327,11 @@ int main()
 }
 ```
 
-使用【string.find_first_of()】【9.5.3节 0325】获取【+-xX.0123456789ABCDEF字符的下标】。
-使用【string.substr()】获取【下标开始的子串】。
-使用【stod()】把【子串】转换为【double】。
+调用【string.find_first_of()】【9.5.3节 0325】获取【第一个数值中可能出现的字符的下标】。
+调用【string.substr()】，向【string.substr()】传入【第一个数值中可能出现的字符的下标】获取【下标开始的子串】。
+调用【stod()】，向【stod()】传入【下标开始的子串】，把【下标开始的子串】转换为【double】。
 
-【转换数值的string的第一个非空白字符】必须是【+-xX.0123456789ABCDEF】。
+【传入字符转换数值函数的string的第一个非空白字符】必须是【+-0x0X.eE0123456789ABCDEF中的字符】。
 
 如果【string】不能转换为数值，那么【转换string和数值的函数】抛出【invalid_argument异常】【5.6节 P173】。
 如果使用【任何类型】都无法表示【转换结果】，那么抛出【out_of_range异常】。
@@ -2228,6 +2352,10 @@ float                f = stof(string变量, 传出指向第一个非数值字符
 double               d = stod(string变量, 传出指向第一个非数值字符的下标的size_t指针);
 long double         ld = stold(string变量, 传出指向第一个非数值字符的下标的size_t指针);
 ```
+
+------
+
+重构分割线。重构分割线。重构分割线。
 
 ### 9.6 容器适配器
 
@@ -5814,4 +5942,4 @@ query函数传入一个要查询单词string，query使用【这个string类型�
 
 使用行号作为下标访问vector获取单词出现所在整行文本。
 
-函数可以正确处理未找到单词的情况，范围for一个空容器，一次循环也不会执行。
+函数可以正确处理未找到单词的情况，范围for一个空容器，一次循环也不会执行。0
